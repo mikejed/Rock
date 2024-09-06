@@ -10,34 +10,8 @@
            class="schedule-toolbox">
 
         <div class="row">
-            <div :class="contentColumnCssClass">
-                <div ref="scrollContainer" :class="actionCssClass">
-                    <NotificationBox v-if="blockActionErrorMessage" :alertType="AlertType.Warning">
-                        {{ blockActionErrorMessage }}
-                    </NotificationBox>
 
-                    <div v-if="contentHeaderHtml" v-html="contentHeaderHtml" class="schedule-toolbox-content-header"></div>
-
-                    <CurrentSchedule v-if="isActionTypeViewCurrent"
-                                     v-model:isLoadingCurrentSchedule="isLoadingCurrentSchedule"
-                                     :isScheduleUnavailabilityEnabled="isScheduleUnavailabilityEnabled"
-                                     :scheduleUnavailabilitybuttonText="scheduleUnavailabilityButtonText"
-                                     :scheduleUnavailabilityHeaderHtml="scheduleUnavailabilityHeaderHtml"
-                                     :disabled="isBusy" />
-
-                    <UpdatePreferences v-if="isActionTypeUpdatePreferences"
-                                       v-model:isLoadingSchedulePreferences="isLoadingSchedulePreferences"
-                                       :disabled="isBusy" />
-
-                    <SignUp v-if="isActionTypeSignUp"
-                            v-model:isLoadingSignUps="isLoadingSignUps"
-                            :immediateNeedsTitle="immediateNeedsTitle"
-                            :immediateNeedsIntroduction="immediateNeedsIntroduction"
-                            :disabled="isBusy" />
-                </div>
-            </div>
-
-            <div v-if="isActionsColumnVisible" class="col-md-4 mt-3 mt-sm-0 schedule-toolbox-actions-column">
+            <div v-if="isActionsColumnVisible" class="col-md-4 col-md-push-8 mb-5 mb-md-auto mt-3 mt-sm-0 schedule-toolbox-actions-column">
                 <DropDownList v-if="isFamilyMemberSelectorVisible"
                               v-model="selectedPersonGuidOrEmptyString"
                               label="Family Members"
@@ -79,6 +53,34 @@
                     </div>
                 </div>
             </div>
+
+            <div :class="contentColumnCssClass">
+                <div ref="scrollContainer" :class="actionCssClass">
+                    <NotificationBox v-if="blockActionErrorMessage" :alertType="AlertType.Warning">
+                        {{ blockActionErrorMessage }}
+                    </NotificationBox>
+
+                    <div v-if="contentHeaderHtml" v-html="contentHeaderHtml" class="schedule-toolbox-content-header"></div>
+
+                    <CurrentSchedule v-if="isActionTypeViewCurrent"
+                                     v-model:isLoadingCurrentSchedule="isLoadingCurrentSchedule"
+                                     :isScheduleUnavailabilityEnabled="isScheduleUnavailabilityEnabled"
+                                     :scheduleUnavailabilitybuttonText="scheduleUnavailabilityButtonText"
+                                     :scheduleUnavailabilityHeaderHtml="scheduleUnavailabilityHeaderHtml"
+                                     :disabled="isBusy" />
+
+                    <UpdatePreferences v-if="isActionTypeUpdatePreferences"
+                                       v-model:isLoadingSchedulePreferences="isLoadingSchedulePreferences"
+                                       :disabled="isBusy" />
+
+                    <SignUp v-if="isActionTypeSignUp"
+                            v-model:isLoadingSignUps="isLoadingSignUps"
+                            :immediateNeedsTitle="immediateNeedsTitle"
+                            :immediateNeedsIntroduction="immediateNeedsIntroduction"
+                            :disabled="isBusy" />
+                </div>
+            </div>
+
         </div>
 
     </Panel>
@@ -162,7 +164,7 @@
     // #region Computed Values
 
     const contentColumnCssClass = computed((): string => {
-        return `col-md-${isActionsColumnVisible.value ? "8" : "12"} schedule-toolbox-content-column`;
+        return `col-md-${isActionsColumnVisible.value ? "8 col-md-pull-4" : "12"} schedule-toolbox-content-column`;
     });
 
     const actionCssClass = computed((): string => {
